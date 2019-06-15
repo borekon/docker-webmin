@@ -1,8 +1,9 @@
-FROM debian:jessie
-MAINTAINER Sita Liu <chsliu+docker@gmail>
+#FROM resin/rpi-raspbian:latest
+FROM balenalib/rpi-raspbian:latest
 
+MAINTAINER ikaritw <ikaritw+docker@gmail.com>
 
-RUN echo root:pass | chpasswd && \
+RUN echo root:P@ssw0rd | chpasswd && \
 	echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
 	apt-get update && \
 	apt-get install -y \
@@ -19,7 +20,6 @@ RUN echo root:pass | chpasswd && \
 	apt-get install -y webmin && \
 	apt-get clean
 
-
 ENV LC_ALL C.UTF-8
 
 EXPOSE 10000
@@ -27,3 +27,4 @@ EXPOSE 10000
 VOLUME ["/etc/webmin"]
 
 CMD /usr/bin/touch /var/webmin/miniserv.log && /usr/sbin/service webmin restart && /usr/bin/tail -f /var/webmin/miniserv.log
+
