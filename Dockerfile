@@ -1,7 +1,8 @@
 #FROM resin/rpi-raspbian:latest
 FROM balenalib/rpi-raspbian:latest
 
-MAINTAINER ikaritw <ikaritw+docker@gmail.com>
+#MAINTAINER ikaritw <ikaritw+docker@gmail.com>
+LABEL maintainer="ikaritw / <ikaritw@gmail.com>"
 
 RUN echo root:P@ssw0rd | chpasswd && \
 	echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
@@ -28,3 +29,4 @@ VOLUME ["/etc/webmin"]
 
 CMD /usr/bin/touch /var/webmin/miniserv.log && /usr/sbin/service webmin restart && /usr/bin/tail -f /var/webmin/miniserv.log
 
+LABEL version="webmin:1.94"

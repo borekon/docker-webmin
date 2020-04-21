@@ -1,0 +1,11 @@
+## docker run --name webmin --restart always -d -p 10000:10000 ikaritw/webmin:1.9.3
+
+webmin:
+  image: ikaritw/webmin:1.9.3
+  container_name: webmin
+  restart: always
+  ports:
+   - 10000:10000
+  volumes:
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/localtime:/etc/localtime:ro
