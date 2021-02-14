@@ -1,16 +1,28 @@
-## docker run --name webmin --restart always -d -p 10000:10000 ikaritw/webmin:1.9.3
+version: '3.8'
 
-webmin:
-  build: 
-    context: .
-    dockerfile: Dockerfile
-    args: 
-      ROOT_PW = MYROOTPW
-  container_name: webmin
-  restart: always
+networks:
+  net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 1.2.3.4/30
+    driver_opts:
+     com.docker.network.bridge.name: webmin_net
+services:
 
-  ports:
-   - 10000:10000
-  volumes:
-    - /etc/timezone:/etc/timezone:ro
-    - /etc/localtime:/etc/localtime:ro
+  webmin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ROOT_PW: MYSAFEPASSWORD
+    container_name: webmin
+    restart: always
+    ports:
+      - 10000:10000
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - net
