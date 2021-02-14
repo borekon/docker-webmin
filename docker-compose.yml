@@ -1,11 +1,14 @@
 ## docker run --name webmin --restart always -d -p 10000:10000 ikaritw/webmin:1.9.3
 
 webmin:
-  build: .
+  build: 
+    context: .
+    dockerfile: Dockerfile
+    args: 
+      ROOT_PW = MYROOTPW
   container_name: webmin
   restart: always
-  args: 
-   - ROOT_PW = MYROOTPW
+
   ports:
    - 10000:10000
   volumes:
