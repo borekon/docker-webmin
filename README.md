@@ -1,20 +1,20 @@
 # docker-webmin
 dockerfile for webmin
 
-## Building the image
+## Building & running the image
 ```
-git clone https://github.com/ikaritw/docker-webmin.git
+git clone https://github.com/kipjr/docker-webmin.git
 cd docker-webmin
-docker build -t ikaritw/webmin .
+docker-compose up --build --force-recreate -d
 ```
 
-## Running the container
+## Stopping the container
 ```
-docker run -d -p 10000:10000 ikaritw/webmin
+docker-compose down
 ```
 
 Log into webmin and manage your server
 ```
 http://hostname.or.ip:10000
-(root:P@ssw0rd)
+(root:$ROOT_PW)
 ```
