@@ -19,6 +19,10 @@ RUN 	echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"
 
 ENV LC_ALL C.UTF-8
 
+ARG ROOT_PW
+
+RUN  echo root:$ROOT_PW | chpasswd
+
 EXPOSE 10000
 
 VOLUME ["/etc/webmin"]
