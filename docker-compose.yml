@@ -5,7 +5,7 @@ webmin:
   container_name: webmin
   restart: always
   args: 
-   - ROOTPW = MYROOTPW
+   - ROOT_PW = MYROOTPW
   ports:
    - 10000:10000
   volumes:
