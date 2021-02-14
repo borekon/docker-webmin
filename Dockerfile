@@ -2,8 +2,7 @@
 #FROM balenalib/rpi-raspbian:latest
 FROM  balenalib/raspberrypi3:buster
 
-RUN echo root:P@ssw0rd | chpasswd && \
-	echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
+RUN 	echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
 	apt-get update && \
 	apt-get install -y \
 	wget \
