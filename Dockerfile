@@ -1,8 +1,6 @@
 #FROM resin/rpi-raspbian:latest
-FROM balenalib/rpi-raspbian:latest
-
-#MAINTAINER ikaritw <ikaritw+docker@gmail.com>
-LABEL maintainer="ikaritw / <ikaritw@gmail.com>"
+#FROM balenalib/rpi-raspbian:latest
+FROM  balenalib/raspberrypi3:buster
 
 RUN echo root:P@ssw0rd | chpasswd && \
 	echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
@@ -16,7 +14,6 @@ RUN echo root:P@ssw0rd | chpasswd && \
 	wget http://www.webmin.com/jcameron-key.asc && \
 	apt-key add jcameron-key.asc && \
 	echo "deb http://download.webmin.com/download/repository sarge contrib" >> /etc/apt/sources.list && \
-	echo "deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib" >> /etc/apt/sources.list && \
 	apt-get update && \
 	apt-get install -y webmin && \
 	apt-get clean
@@ -29,4 +26,4 @@ VOLUME ["/etc/webmin"]
 
 CMD /usr/bin/touch /var/webmin/miniserv.log && /usr/sbin/service webmin restart && /usr/bin/tail -f /var/webmin/miniserv.log
 
-LABEL version="webmin:1.94"
+LABEL version="webmin:1.970"
