@@ -13,7 +13,7 @@ docker-compose up --build --force-recreate -d
 docker-compose down
 ```
 
-Log into webmin and manage your server
+##Log into webmin and manage your server
 ```
 http://hostname.or.ip:10000
 (root:$ROOT_PW)
