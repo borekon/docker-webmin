@@ -6,22 +6,30 @@ networks:
     ipam:
      driver: default
      config:
-       - subnet: 1.2.3.4/30
+       - subnet: 192.168.128.140/30 #192.168.128.141 - 192.168.128.142 (bc:143)
     driver_opts:
      com.docker.network.bridge.name: webmin_net
-services:
 
+#secrets
+secrets:
+  ROOT_PW:
+    file: ./secrets
+
+services:
   webmin:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        ROOT_PW: MYSAFEPASSWORD
     container_name: webmin
-    restart: always
+    hostname: webmin
+    restart: unless-stopped
+    privileged: false
+    secrets:
+      - source: ROOT_PW
     ports:
       - 10000:10000
     volumes:
+      - ./config:/config
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
