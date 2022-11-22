@@ -3,15 +3,15 @@ Minimum working version of Webmin in Docker
 
 ## Building & running the image
 ```
-git clone https://github.com/kipjr/docker-webmin.git
+git clone https://github.com/The-Drobe/docker-webmin.git
 cd docker-webmin
-echo -n "somepassword" > ./secrets
-docker-compose up --build --force-recreate -d
+docker build -t webmin:1 .
+docker run -p 10000:10000 webmin:1
 ```
 
 ## Stopping the container
 ```
-docker-compose down
+docker kill ContainerID
 ```
 
 ## Log into webmin and manage your server
