@@ -1,16 +1,16 @@
-FROM  ubuntu:latest
+FROM  ubuntu:focal
 
 RUN     echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
 	apt-get update && \
 	apt-get install -y \
-	net-tools gnupg2 wget locales apache2 && \
+	net-tools gnupg2 wget curl locales && \
 	dpkg-reconfigure locales && \
 	locale-gen C.UTF-8 && \
 	/usr/sbin/update-locale LANG=C.UTF-8 && \
-	wget http://www.webmin.com/jcameron-key.asc -O /etc/apt/trusted.gpg.d/jcameron-key.asc && \
-	echo "deb http://download.webmin.com/download/repository sarge contrib" >> /etc/apt/sources.list && \
+	curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && \
+	sh setup-repos.sh && \
 	apt-get update && \
-	apt-get install -y webmin && \
+	apt-get install -y webmin --install-recommends && \
 	apt-get clean
 RUN mkdir -p /run/secrets/
 RUN touch /run/secrets/ROOT_PW
