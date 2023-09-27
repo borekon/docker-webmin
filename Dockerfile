@@ -7,7 +7,7 @@ RUN     echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order::
 	locale-gen es_ES.UTF-8 en_GB.UTF-8 && \
 	/usr/sbin/update-locale LANG=C.UTF-8 && \
 	curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && \
-	sh setup-repos.sh && \
+	sh setup-repos.sh -f && \
 	apt-get update && \
 	apt-get install -y webmin --install-recommends && \
 	apt-get clean
