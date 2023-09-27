@@ -9,7 +9,7 @@ RUN     echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order::
 	curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && \
 	sh setup-repos.sh -f && \
 	apt-get update && \
-	apt-get install -y webmin --install-recommends && \
+	DEBIAN_FRONTEND=noninteractive apt-get install -y webmin --install-recommends && \
 	apt-get clean
 RUN mkdir -p /run/secrets/
 RUN touch /run/secrets/ROOT_PW
