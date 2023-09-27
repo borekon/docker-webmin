@@ -7,9 +7,8 @@ RUN     echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order::
 	locale-gen es_ES.UTF-8 en_GB.UTF-8 && \
 	/usr/sbin/update-locale LANG=es_ES.UTF-8 && \
 	curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && \
-	sh setup-repos.sh -f && \
-	apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get install -y webmin --install-recommends && \
+	sh setup-repos.sh -f
+RUN     DEBIAN_FRONTEND=noninteractive apt-get install -y webmin --install-recommends && \
 	apt-get clean
 RUN mkdir -p /run/secrets/
 RUN touch /run/secrets/ROOT_PW
