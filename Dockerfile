@@ -2,10 +2,10 @@ FROM  ubuntu:focal
 
 RUN     echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
 	apt-get update && \
-	apt-get install -y net-tools gnupg2 wget curl locales && \
-	dpkg-reconfigure locales && \
+	DEBIAN_FRONTEND=noninteractive apt-get install -y net-tools gnupg2 wget curl locales && \
+	DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
 	locale-gen es_ES.UTF-8 en_GB.UTF-8 && \
-	/usr/sbin/update-locale LANG=C.UTF-8 && \
+	/usr/sbin/update-locale LANG=es_ES.UTF-8 && \
 	curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && \
 	sh setup-repos.sh -f && \
 	apt-get update && \
